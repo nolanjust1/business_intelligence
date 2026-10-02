@@ -18,6 +18,30 @@
 | `name` | text | Listing title as shown on Airbnb (for example "Tiny Studio Apartment 94 Walk Score"). Never empty. |
 | `price` | real | Nightly price in U.S. dollars on the snapshot date, with the dollar sign and commas removed. Ranges from 2.56 to 11,412; never `NULL` (rows without a price were dropped). |
 | `room_type` | text | Airbnb's four listing categories: `Entire home/apt` (11,652 rows), `Private room` (2,951), `Hotel room` (246), or `Shared room` (38). |
+| `host_id` | text | Airbnb's unique id for the host. |
+| `host_name` | text | The host name or org. |
+| `host_since` | text | Date the host joined Airbnb. (YYYY-MM-DD). |
+| `host_is_superhost` | text | Indicates if host is a Superhost. ('t' for true, 'f' for false). |
+| `neighbourhood` | text | Inside Airbnb's `neighbourhood_cleansed` column representing standardized municipal neighborhood names. |
+| `latitude` | real | WGS84 geographic coordinate for latitude (anonymized within 150m radius). |
+| `longitude` | real | WGS84 geographic coordinate for longitude (anonymized within 150m radius). |
+| `property_type` | text | Detailed property classification (e.g., 'Entire rental unit', 'Private room in home'). |
+| `accommodates` | integer | Maximum number of guests allowed to stay in the listing. |
+| `bedrooms` | integer | Total number of bedrooms available in the listing. |
+| `beds` | integer | Total number of beds provided. |
+| `bathrooms_text` | text | Text description of bathrooms and size. |
+| `minimum_nights` | integer | Minimum number of night stay required by the listing. |
+| `availability_365` | integer | Number of available days in the upcoming 365 days. |
+| `number_of_reviews` | integer | Total  number of reviews received by the listing. |
+| `number_of_reviews_ltm` | integer | Number of reviews received in the last twelve months. |
+| `first_review` | text | Date of the earliest review on record (YYYY-MM-DD). |
+| `last_review` | text | Date of the most recent review on record (YYYY-MM-DD). |
+| `review_scores_rating` | real | Average overall user rating score on a 0–5 scale. |
+| `reviews_per_month` | real | Average number of reviews received per month since listing creation. |
+| `instant_bookable` | text | Indicator whether guest can book immediately without host approval ('t' or 'f'). |
+| `estimated_revenue_l365d` | real | Estimated gross listing revenue over the last 365 days based on occupancy model. |
+| `amenities_count` | integer | Computed count of total items in each listing's amenities list. |
+
 
 Continue the table for the remaining 23 columns (Assignment 05): `host_id`, `host_name`, `host_since`, `host_is_superhost`, `neighbourhood`, `latitude`, `longitude`, `property_type`, `accommodates`, `bedrooms`, `beds`, `bathrooms_text`, `minimum_nights`, `availability_365`, `number_of_reviews`, `number_of_reviews_ltm`, `first_review`, `last_review`, `review_scores_rating`, `reviews_per_month`, `instant_bookable`, `estimated_revenue_l365d`, `amenities_count`.
 
