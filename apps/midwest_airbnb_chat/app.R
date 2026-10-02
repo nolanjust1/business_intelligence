@@ -1,11 +1,20 @@
-con = DBI::dbConnect(RSQLite::SQLite(), "data/midwest_airbnb.db")
+library(shiny)
+library(bslib)
+library(querychat)
+library(DBI)
+library(RSQLite)
 
-client = ellmer::chat_openai(
+# 1. Database Connection
+con <- DBI::dbConnect(RSQLite::SQLite(), "data/midwest_airbnb.db")
+
+# 2. Ellmer OpenAI Client
+client <- ellmer::chat_openai(
   model  = "gpt-5.6-luna",
   params = ellmer::params(reasoning_effort = "none")
 )
 
-qc = querychat::querychat(
+# 3. Querychat Object
+qc <- querychat::querychat(
   con, "listings",
   client             = client,
   tools              = c("filter", "query", "visualize"),
@@ -13,5 +22,16 @@ qc = querychat::querychat(
   data_description   = "data/data_desc.md",
   extra_instructions = "data/extra_instructions.md"
 )
-qc$app_obj()
 
+# 4. UI using the new R6 method qc$ui()
+ui <- qc$ui(
+  title = "Midwest Airbnb Chat",
+  theme = bs_theme(bootswatch = "minty")
+)
+
+# 5. Server function using the new R6 method qc$server()
+server <- function(input, output, session) {
+  qc$server()
+}
+
+shinyApp(ui, server)
