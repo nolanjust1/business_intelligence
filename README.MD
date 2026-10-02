@@ -19,4 +19,4 @@ Semester: Fall 2026
 ![Query 2](q2.png)
 
 ### 3. Superhosts count by city
-![Query 3](q3.png)
+!![Query 3](q3.jpg)
