@@ -1,0 +1,16 @@
+---
+title: "class06"
+author: "Nolan Just"
+date: "2026-10-09"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    coad_folding: show
+    code_download: TRUE
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+

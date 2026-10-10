@@ -1,0 +1,74 @@
+---
+title: "class04"
+author: "Nolan Just"
+date: "2026-10-08"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    coad_folding: show
+    code_download: TRUE
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+
+job = list(
+  title   = "Research Data Scientist, Magic Eye",
+  company = "Google",
+  salary  = list(min = 147000, max = 210000)
+)
+str(job)
+
+
+# Write one expression to extract each of
+# 1. The company name.
+job[[2]] #if you were to use one sq bracket, it would have returned a list
+
+#or you can use
+company_alt = job$company     #you are naming the company as company alt combining the job column and the vector within it so you can just pull that vector
+
+# 2. The maximum salary.
+
+maximum_salary = job$salary$max
+
+# naming this value as maximum salary then you are pulling from the job list, the salary column, and then the maximum within the vector because it is two values
+
+# 3. The maximum salary again, using only [[ ]].
+
+max_salary_alt = job[[3]][[2]]   #in this you are pulling from job the third element (salary) then the second element within salary (max)
+
+# 4. The names of the elements in job.
+# Type them in a chunk in your markdown and run each line. The ad is the Google posting from Class 01.
+
+names(job)
+
+
+
+
+```
+
+
+#subsetting and indexing
+```{r}
+crashes_by_day = c(2020, 2241, 2327, 2285, 2380, 1866, 1664)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu","Fri", "Sat", "Sun")
+
+crashes_by_day[2]                      # one position
+
+crashes_by_day[c("Wed", "Fri")] # Pulling elements by their name
+
+crashes_by_day[] # returns all the elements
+
+
+```
+
+
+
+#Subsetting a data frame

@@ -1,0 +1,86 @@
+---
+title: "Class05"
+author: "Nolan Just"
+date: "2026-10-09"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    coad_folding: show
+    code_download: TRUE
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# doing it on my own
+
+```{r}
+campus = jsonlite::fromJSON(
+  "https://isa401-find-your-seat.vercel.app/campus.json")
+  
+  
+# What to find: campus is a named list: a briefing and five very different places. One of the places is the business school. Its element holds a field called code. Type that code.
+# Hint: look at what campus holds before you reach into it (str() with max.level = 1 keeps it short). Then remember the Pepper Shaker rule when you open the element you want. The code is capital letters, no spaces.
+
+
+names(campus)
+
+campus$Farmer$code
+
+
+# What to find: inside the business school's element, floors is a named list with one element per floor. Room 2050 is on one of them. That floor has a field called sections, the number of Fall 2026 sections meeting on the whole floor. Type that number.
+# Hint: a room number tells you its floor. Reach into the business school, then into its floors, and pick the floor by name. On a named list, the second element and the element named "2" are not the same thing.
+
+names(campus$Farmer$floors)
+campus$Farmer$floors[[3]]
+campus$Farmer$floors[[3]]$sections
+
+
+# What to find: the same floor has a rooms element, a data frame with one row per room and a column isa_sections. Type the isa_sections value on the row where room is "2050".
+# Hint: it is a data frame, so the Class 04 row rule applies: a logical test on one column picks the row, then read the column you want. Saving the data frame to a short name first makes the line easier to type. The room column is text.
+
+campus$Farmer$floors[[3]]$rooms
+
+
+```
+
+
+# Occupation example
+```{r}
+
+# the sheet is tab five on the excel spreadsheet
+# skip= 1 because the first row of data is pointless
+
+occupation = readxl::read_excel(
+path = "data/occupation.xlsx", sheet = 5,
+skip= 1
+)
+
+
+# - when you subset in R drops specific things 
+# given that they are multiple I put them in a vector
+#notice the "," after the paranthese nothing is after to comma so I want to keep the rest of the columns 
+
+occupation = occupation [-c(32,33,34),]
+
+
+```
+
+
+# Reading json data
+
+```{r}
+json_url =
+  "https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json?$limit=100"
+  
+crashes_json = jsonlite::fromJSON(json_url)
+dplyr::glimpse(
+  crashes_json[, c("crashdate", "dayofweek",
+                   "crashseverity", "age")])
+```
+

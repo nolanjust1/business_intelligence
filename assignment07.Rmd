@@ -1,0 +1,64 @@
+---
+title: "Assigment07"
+author: "Nolan Just"
+date: "2026-10-08"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    coad_folding: show
+    code_download: TRUE
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+dept_abbrv = c("Accountancy", "Economics", "Entrepreneurship", "Finance", "Information Systems & Analytics", "Marketing", "Management")
+scrape_proffessors = function(abbrv){
+  
+  dept_url = paste0('https://miamioh.edu/fsb/directory/?up=/query/all/all/', URLencode(abbrv), '/all')
+
+
+webpage = rvest::read_html(dept_url)
+
+#DEPARTMENT
+
+webpage |> rvest::html_elements("tr > td:nth-child(1)") |> rvest::html_text2()->department
+
+
+#NAME
+
+webpage |> rvest::html_elements("tr > td:nth-child(3) a") |> rvest::html_text2()->name
+
+
+webpage |> rvest::html_elements("tr > td:nth-child(3)") |> rvest::html_text2()->roles
+
+#WEBSITE
+webpage |> rvest::html_elements("tr > td:nth-child(3) a") |> rvest::html_attr("href")->website
+
+df = data.frame(department = department, name = name, position = roles, website = website)
+
+
+return(df)
+}
+
+test = scrape_proffessors(abbrv = "Finance")
+
+# to use functions from purr, we will use a map_*() or a map2_*(), or a pmap_*()
+# map uses a function that takes a single input (or you are only chaning a single input)
+# map2 uses a function that takes two inputs
+# pmap>=3
+# after the _, you put the type of object you are getting back
+
+courses_df_from = purrr::map_df(.x = dept_abbrv, .f = scrape_proffessors)
+
+head(courses_df_from)
+
+```
+
+
